@@ -5,7 +5,9 @@ Software Design Patterns
 
 This is a Repository For our project
 
-Group 3 (SE2): Jana Malibari 2110751 (Leader)
+Group 3 (SE2): 
+
+Jana Malibari 2110751 (Leader)
 
 Bushra Alandijani 2111452
 
