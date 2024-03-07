@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-class Hangman {
+class Hangman { 
 
     public static void main(String[] args) {
         Printer printer = new Printer();
