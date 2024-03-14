@@ -6,11 +6,11 @@ class Hangman {
         Printer printer = new Printer();
         printer.printTitle();
 
-        WordParser wordparser = new WordParser("./wordlist.txt");
-
-        wordparser.createFile();
-        wordparser.createScanner();
-        ArrayList<String> words = wordparser.parse();
+        WParserFactory parserFactory = new WordParserFactory();
+		Parser wordParser = parserFactory.createParser("./wordlist.txt");
+		wordParser.createFile();
+		wordParser.createScanner();
+		ArrayList<String> words = wordParser.parse();
 
         // Print word for testing
         // System.out.println(word);
