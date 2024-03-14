@@ -6,7 +6,7 @@ class Hangman {
         Printer printer = new Printer();
         printer.printTitle();
 
-        WParserFactory parserFactory = new WordParserFactory();
+        ParserFactory parserFactory = new WordParserFactory();
 		Parser wordParser = parserFactory.createParser("./wordlist.txt");
 		wordParser.createFile();
 		wordParser.createScanner();
