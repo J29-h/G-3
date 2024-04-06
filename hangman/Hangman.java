@@ -1,3 +1,5 @@
+// implement necessary changes based on singleton pattern
+
 import java.util.ArrayList;
 
 class Hangman {
@@ -6,11 +8,11 @@ class Hangman {
         Printer printer = new Printer();
         printer.printTitle();
 
-        ParserFactory parserFactory = new WordParserFactory();
-		Parser wordParser = parserFactory.createParser("./wordlist.txt");
-		wordParser.createFile();
-		wordParser.createScanner();
-		ArrayList<String> words = wordParser.parse();
+        WordParser wordparser = new WordParser("./wordlist.txt");
+
+        wordparser.createFile();
+        wordparser.createScanner();
+        ArrayList<String> words = wordparser.parse();
 
         // Print word for testing
         // System.out.println(word);
@@ -32,7 +34,7 @@ class Hangman {
                 winningStreak = 0;
             }
 
-        } while (PlayAgain.wannaPlay() == true);
+        } while (PlayAgain.getInstance().wannaPlay() == true); //the only change to implement singleton pattern 
 
         printer.print("Thanks for playing!");
         
