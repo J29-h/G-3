@@ -1,6 +1,20 @@
 import java.util.ArrayList;
 
+// a singleton design pattern was implemented here
 class Printer {
+	
+	private static Printer instance;
+
+    // Private constructor to prevent instantiation from other users
+    private Printer() {
+    }
+
+    public static Printer getInstance() {
+        if (instance == null) {
+            instance = new Printer();
+        }
+        return instance;
+    }
 
     // Print game title and OS info
     void printTitle() {
