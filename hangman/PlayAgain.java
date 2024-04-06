@@ -1,3 +1,4 @@
+// a singleton design pattern was implemented here
 class PlayAgain {
 
     static boolean wannaPlay() {
