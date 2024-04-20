@@ -5,7 +5,7 @@ import java.util.ArrayList;
 class Hangman {
 
     public static void main(String[] args) {
-        Printer printer = new Printer();
+        Printer printer = Printer.getInstance();
         printer.printTitle();
 
         WordParser wordparser = new WordParser("./wordlist.txt");
