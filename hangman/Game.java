@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Game {
 
-    private Printer printer = new Printer();
+    private Printer printer = Printer.getInstance();
 
     private String word; // The word to find
     private int lettersRemaining;
