@@ -26,7 +26,12 @@ class Hangman {
             WordPicker wordPicker = new WordPicker(words);
             String word = wordPicker.pick();
             Game game = new Game(word);
-
+            
+            Hint decoratedHint = new HintDecoratorActivate(new HintLetter());
+			Hint hintWithDefinition = new HintDefinitionDecorator(decoratedHint, "definition.txt");
+			game.setHint(hintWithDefinition);
+			// Set the decorated hint as the hint for the game
+			game.setHint(hintWithDefinition);
             if (game.play() == true) {
                 winningStreak += 1;
                 printer.print("Winning streak: " + winningStreak);
