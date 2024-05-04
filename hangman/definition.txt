@@ -1,0 +1,136 @@
+Red: Bright and intense color.
+Blue: Cool and calming color.
+Green: Natural and refreshing color.
+Yellow: Bright and cheerful color.
+Orange: Warm and vibrant color.
+Pink: Soft and delicate color.
+Purple: Rich and regal color.
+Brown: Earthy and neutral color.
+Black: Dark and mysterious color.
+White: Pure and pristine color.
+Gray: Neutral and balanced color.
+Beige: Subtle and warm color.
+Turquoise: Bright and tropical color.
+Gold: Warm and luxurious color.
+Silver: Cool and metallic color.
+Navy: Deep and sophisticated color.
+Teal: Blue-green and calming color.
+Coral: Vibrant and tropical color.
+Lavender: Soft and soothing color.
+Maroon: Rich and deep reddish-brown color.
+Indigo: Dark and deep bluish-purple color.
+Olive: Earthy and muted green color.
+Magenta: Intense and vibrant purplish-red color.
+Peach: Soft and pastel orange color.
+Charcoal: Dark and smoky gray color.
+Mauve: Pale and muted purple color.
+Ruby: Deep and vivid red color.
+Mustard: Warm and golden yellow color.
+Emerald: Bright and vivid green color.
+Coral: Warm and tropical pink-orange color.
+Bronze: Brownish-gold metallic color.
+Salmon: Pale and pinkish-orange color.
+Lilac: Light and pale purple color.
+Turquoise: Blue-green and vibrant color.
+Caramel: Warm and golden brown color.
+Pewter: Muted and metallic gray color.
+Blush: Pale and rosy pink color.
+Chartreuse: Bright and yellowish-green color.
+Burgundy: Deep and purplish-red color.
+Tangerine: Bright and vibrant orange color.
+Slate: Grayish-blue color.
+Coral: Pinkish-orange and tropical color.
+Teal: Dark and greenish-blue color.
+Lavender: Pale and soft purple color.
+Hazelnut: Warm and light brown color.
+Periwinkle: Pale and bluish-purple color.
+Taupe: Grayish-brown and neutral color.
+Olive: Dark and greenish-brown color.
+Mint: Pale and refreshing green color.
+Lion: Majestic big cat known for its mane and powerful roar.
+Tiger: Striped feline with impressive strength and agility.
+Elephant: Large herbivorous mammal with a long trunk and tusks.
+Giraffe: Tall, long-necked herbivore with a distinctive spotted pattern.
+Zebra: Equine with black and white stripes found in Africa.
+Gorilla: Largest primate known for its strength and intelligence.
+Bear: Large mammal with a stocky build and varying species worldwide.
+Wolf: Social carnivore with a keen hunting instinct.
+Fox: Small to medium-sized carnivore with a bushy tail.
+Cheetah: Fastest land animal with a slender body and distinctive spots.
+Leopard: Agile feline with a spotted coat and excellent climbing ability.
+Jaguar: Powerful big cat with a muscular build and rosette patterns.
+Rhino: Large herbivorous mammal with a horn on its nose.
+Hippo: Semi-aquatic mammal known for its massive size and barrel-shaped body.
+Kangaroo: Marsupial with strong hind legs for hopping.
+Koala: Arboreal marsupial known for its cuddly appearance and eucalyptus diet.
+Panda: Iconic bear with distinct black and white markings, native to China.
+Monkey: Primate with a long tail and agile movements.
+Chimpanzee: Intelligent primate closely related to humans.
+Orangutan: Great ape found in the rainforests of Asia.
+Dolphin: Highly intelligent marine mammal known for its playful nature.
+Whale: Enormous marine mammal with a streamlined body and blowhole.
+Shark: Predatory fish with a cartilaginous skeleton and sharp teeth.
+Octopus: Cephalopod mollusk known for its eight arms and intelligence.
+Jellyfish: Gelatinous marine creature with tentacles and a stinging ability.
+Crab: Crustacean with a hard exoskeleton and pincers.
+Lobster: Large marine crustacean with a long body and claws.
+Penguin: Flightless bird with a streamlined body and wings for swimming.
+Seal: Semi-aquatic mammal with flippers and a sleek body.
+Walrus: Large marine mammal with tusks and a thick layer of blubber.
+Crocodile: Large reptile with a long snout, powerful jaws, and a semi-aquatic lifestyle.
+Alligator: Reptile similar to a crocodile but with a broader snout.
+Snake: Legless reptile known for its elongated body and ability to slither.
+Lizard: Reptile with scaly skin and the ability to regenerate its tail.
+Turtle: Reptile with a protective shell and a lifespan that can span decades.
+Frog: Amphibian known for its ability to jump and its unique lifecycle.
+Toad: Chunky amphibian with bumpy skin and a preference for terrestrial habitats.
+Salamander: Amphibian with a slender body and a long tail.
+Owl: Nocturnal bird of prey known for its large eyes and silent flight.
+Eagle: Large predatory bird with excellent vision and powerful wings.
+Falcon: Agile bird of prey known for its high-speed hunting dives.
+Hawk: Bird of prey with sharp vision and a broad wingspan.
+Parrot: Colorful bird known for its ability to mimic sounds and speech.
+Toucan: Tropical bird with a large, colorful bill.
+Peacock: Large bird with a vibrant fan-shaped tail display.
+Flamingo: Tall wading bird with a distinctive pink plumage and long legs.
+Swan: Graceful waterfowl known for its elegance and long neck.
+Hummingbird: Tiny bird with the ability to hover mid-air and a rapid wingbeat.
+Gazelle: Graceful antelope known for its speed and slender build.
+Pizza: Flat crust, tomato sauce, cheese, toppings.
+Hamburger: Ground beef patty, bun, lettuce, tomato, condiments.
+Pasta: Dough shapes, sauces.
+Sushi: Rice, fish/vegetables, seaweed wrap.
+Steak: Tender meat, beef usually.
+Tacos: Tortilla, seasoned meat, cheese, toppings.
+Burritos: Flour tortilla, beans, rice, meat, rolled.
+Curry: Spiced sauce, vegetables, meat/seafood, rice/bread.
+Ramen: Japanese noodle soup, toppings.
+Lobster: Sweet shellfish, boiled/grilled.
+Crab: Delicate meat, boiled/steamed.
+Shrimp: Small crustacean, cooked and peeled.
+Salmon: Fatty fish, grilled/baked.
+Omelette: Eggs, fillings like cheese, veggies, ham.
+Pancakes: Flat cakes, served with syrup/toppings.
+Waffles: Crispy batter, served with syrup/fruit.
+Sandwich: Bread, fillings like meats, cheese, veggies.
+HotDog: Cooked sausage, bun, condiments.
+Soup: Liquid dish, meat, veggies, seasonings.
+Salad: Mixed veggies, fruits, meats, served cold.
+Nachos: Tortilla chips, melted cheese, toppings.
+Cheeseburger: Hamburger with cheese, lettuce, tomato, condiments.
+Fajitas: Grilled meat strips, tortillas, toppings.
+Chicken Wings: Fried/baked chicken wings, sauce/seasonings.
+Meatballs: Small balls made from ground meat, served in sauce.
+Lasagna: Layered pasta, cheese, filling, baked.
+Enchiladas: Rolled tortillas, sauce, cheese, baked.
+Tofu: Soybean-based, meat substitute.
+Sausages: Grilled/fried meat cylinders.
+Guacamole: Avocado dip, lime, onions, tomatoes, seasonings.
+Hummus: Chickpea spread, tahini, lemon, garlic, olive oil.
+Dumplings: Dough balls with fillings.
+Spring Rolls: Asian appetizer, filled, deep-fried/fresh.
+Quiche: Baked pastry with eggs, cream, cheese, fillings.
+Sashimi: Thinly sliced raw seafood, soy sauce, wasabi.
+Paella: Spanish rice dish, meats, seafood, veggies, saffron.
+Pho: Vietnamese soup, rice noodles, toppings.
+Gyoza: Japanese dumplings, ground meat, veggies, pan-fried/steamed.
