@@ -8,11 +8,44 @@ class Hangman {
         Printer printer = Printer.getInstance();
         printer.printTitle();
 
-        WordParser wordparser = new WordParser("./wordlist.txt");
+        System.out.println("Choose a category:");
+        System.out.println("1. Food");
+        System.out.println("2. Colors");
+        System.out.println("3. Animals");
+        System.out.println("4. Random");
+        System.out.print("Enter your choice: ");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        Category selectedCategory;
 
-        wordparser.createFile();
-        wordparser.createScanner();
-        ArrayList<String> words = wordparser.parse();
+        switch (choice) {
+            case 1:
+                selectedCategory = new FoodCategory();
+                break;
+            case 2:
+                selectedCategory = new ColorCategory();
+                break;
+            case 3:
+                selectedCategory = new AnimalCategory();
+                break;
+            case 4:
+            	selectedCategory = new CompositeCategory("wordlist", List.of(new FoodCategory(), new ColorCategory(), new AnimalCategory()));
+            default:
+                System.out.println("Invalid choice. Exiting the game.");
+                return;
+        }
+if(choice <4) {
+        String categoryFileName = selectedCategory.getCategoryName().toLowerCase() + "_words.txt";
+        WordParser wordParser = new WordParser(categoryFileName);
+        wordParser.createFile();
+        wordParser.createScanner();
+        List<String> words = wordParser.parse();}
+else {
+	 String categoryFileName = selectedCategory.getCategoryName().toLowerCase() + "_words.txt";
+     WordParser wordParser = new WordParser(categoryFileName);
+     wordParser.createFile();
+     wordParser.createScanner();
+     List<String> words = wordParser.parse();}
 
         // Print word for testing
         // System.out.println(word);
