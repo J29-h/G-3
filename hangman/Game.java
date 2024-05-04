@@ -1,159 +1,197 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Game {
 
-    private Printer printer = Printer.getInstance();
+	private Printer printer = Printer.getInstance();
 
-    private String word; // The word to find
-    private int lettersRemaining;
+	private String word; // The word to find
+	private int lettersRemaining;
+	private Hint hint; // here
+	private int hintRequests; // Track the number of hint requests
+	private Scanner scanner;
+	private final int maxHintRequests = 3;
 
-    private String[] letters;
-    private ArrayList<String> enteredLetters;
-    private ArrayList<String> foundLetters;
-    private ArrayList<String> wrongLetters;
+	private String[] letters;
+	private ArrayList<String> enteredLetters;
+	private ArrayList<String> foundLetters;
+	private ArrayList<String> wrongLetters;
 
-    private int lives;
+	private int lives;
 
-    Game(String word_) {
-        word = word_;
-        lettersRemaining = word.length(); // Initialized as the total length of the word
-        letters = new String[lettersRemaining]; // Will contain the letters of the word, each letter will be one element
-        enteredLetters = new ArrayList<String>();
-        foundLetters = new ArrayList<String>();
-        wrongLetters = new ArrayList<String>();
-        lives = 6;
-    }
+	Game(String word_) {
+		word = word_;
+		lettersRemaining = word.length(); // Initialized as the total length of the word
+		letters = new String[lettersRemaining]; // Will contain the letters of the word, each letter will be one element
+		enteredLetters = new ArrayList<String>();
+		foundLetters = new ArrayList<String>();
+		wrongLetters = new ArrayList<String>();
+		lives = 6;
+	}
 
-    // Puts each letter of the word into an array
-    private void createLettersArray() {
-        for (int i = 0; i < letters.length; i++) {
-            letters[i] = Character.toString(word.charAt(i));
-        }
-    }
+	public void setHint(Hint hint) {
+		this.hint = hint;
+	}
 
-    // Check if input is letter
-    private boolean checkIfLetter(String letter) {
-        boolean isLetter = false;
+	private boolean RequestsHint() {
+		// Determine if the player requests a hint
+		scanner = new Scanner(System.in);
+		System.out.println("Enter 1 to request a hint, or any other key to continue:");
+		String input = scanner.nextLine();
+		return input.equals("1");
+	}
 
-        if (letter.matches("[a-zA-Z]+")) {
-            isLetter = true;
-        }
-        return isLetter;
-    }
+	private void displayHint(String hint) {
+		// Display the hint to the player
+		System.out.println(hint);
+	}
 
-    // Checks if letter has been entered before
-    private boolean checkIfEntered(String letter, ArrayList<String> enteredLetters) {
-        boolean entered = false;
-        for (String let : enteredLetters) {
-            if (let.equals(letter)) {
-                entered = true;
-                break;
-            }
-        }
-        return entered;
-    }
+	private void displayRemainingHints(int remainingHints) {
+		System.out.println("Remaining hints: " + remainingHints);
+	}
 
-    // Checks if letter input is present in word
-    private boolean checkLetter(String letter, String[] letters) {
-        boolean found = false;
+	// Puts each letter of the word into an array
+	private void createLettersArray() {
+		for (int i = 0; i < letters.length; i++) {
+			letters[i] = Character.toString(word.charAt(i));
+		}
+	}
 
-        for (String let : letters) {
-            if (let.equals(letter)) {
-                found = true;
-                break;
-            }
-        }
+	// Check if input is letter
+	private boolean checkIfLetter(String letter) {
+		boolean isLetter = false;
 
-        return found;
+		if (letter.matches("[a-zA-Z]+")) {
+			isLetter = true;
+		}
+		return isLetter;
+	}
 
-    }
+	// Checks if letter has been entered before
+	private boolean checkIfEntered(String letter, ArrayList<String> enteredLetters) {
+		boolean entered = false;
+		for (String let : enteredLetters) {
+			if (let.equals(letter)) {
+				entered = true;
+				break;
+			}
+		}
+		return entered;
+	}
 
-    // Checks how many times a correct letter appears in the word
-    private int checkTimesFound(String letter, String[] letters) {
-        int times = 0;
-        for (String let : letters) {
-            if (let.equals(letter)) {
-                times += 1;
-            }
-        }
+	// Checks if letter input is present in word
+	private boolean checkLetter(String letter, String[] letters) {
+		boolean found = false;
 
-        return times;
-    }
+		for (String let : letters) {
+			if (let.equals(letter)) {
+				found = true;
+				break;
+			}
+		}
 
-    // Adds letter to arraylist
-    private void addLetter(String letter, ArrayList<String> letters) {
-        letters.add(letter);
-    }
+		return found;
 
-    // One round
-    boolean play() {
-        createLettersArray();
-        printer.printWord(foundLetters, word);
+	}
 
-        printer.print("Letters to Find: " + lettersRemaining);
-        printer.printEmptyLine();
-        printer.printHanging(lives);
+	// Checks how many times a correct letter appears in the word
+	private int checkTimesFound(String letter, String[] letters) {
+		int times = 0;
+		for (String let : letters) {
+			if (let.equals(letter)) {
+				times += 1;
+			}
+		}
 
-        while (lives > 0) {
+		return times;
+	}
 
-            printer.print("Enter letter:");
+	// Adds letter to arraylist
+	private void addLetter(String letter, ArrayList<String> letters) {
+		letters.add(letter);
+	}
 
-            LetterInput letterInput = new LetterInput();
-            String letter = letterInput.input().toLowerCase();
+	// One round
+	boolean play() {
+		hintRequests = 0; // Initialize hint requests counter
+		createLettersArray();
+		printer.printWord(foundLetters, word);
 
-            // Check if input is letter
-            if (checkIfLetter(letter) == false) {
-                printer.print("This was not a letter!");
-                continue;
-            }
+		printer.print("Letters to Find: " + lettersRemaining);
+		printer.printEmptyLine();
+		printer.printHanging(lives);
 
-            // Check if letter has been entered before
-            if (checkIfEntered(letter, enteredLetters) == true) {
-                printer.print("You have already entered " + letter + "!");
-                continue;
-            }
+		while (lives > 0) {
 
-            enteredLetters.add(letter);
+			// When the player requests a hint:
+			if (hintRequests < maxHintRequests && RequestsHint()) {
+				String hintMessage = hint.ApplyHint(word, foundLetters);
+				displayHint(hintMessage);
+				hintRequests++; // Increment hint requests counter
 
-            boolean result = checkLetter(letter, letters);
+				int remainingHints = maxHintRequests - hintRequests;
+				displayRemainingHints(remainingHints); // Display remaining hints
 
-            printer.printIsLetterPresent(letter, result);
+			}
 
-            if (result == true) {
-                int timesFound = checkTimesFound(letter, letters);
-                lettersRemaining -= timesFound;
-                addLetter(letter, foundLetters);
+			printer.print("Enter letter:");
+			LetterInput letterInput = new LetterInput();
+			String letter = letterInput.input().toLowerCase();
 
-                printer.printLetterLists(foundLetters, wrongLetters);
-            }
+			// Check if input is letter
+			if (checkIfLetter(letter) == false) {
+				printer.print("This was not a letter!");
+				continue;
+			}
 
-            if (result == false) {
-                lives -= 1;
-                addLetter(letter, wrongLetters);
+			// Check if letter has been entered before
+			if (checkIfEntered(letter, enteredLetters) == true) {
+				printer.print("You have already entered " + letter + "!");
+				continue;
+			}
 
-                printer.printLetterLists(foundLetters, wrongLetters);
-            }
+			enteredLetters.add(letter);
 
-            // Winning condition
-            if (lettersRemaining == 0 && lives > 0) {
-                printer.printHappyMan();
-                printer.printWord(foundLetters, word);
-                printer.print("You win!");
-                return true;
-            }
+			boolean result = checkLetter(letter, letters);
 
-            printer.print("Letters remaining: " + lettersRemaining);
-            printer.printEmptyLine();
-            printer.printHanging(lives);
-            printer.printWord(foundLetters, word);
-            printer.printEmptyLine();
+			printer.printIsLetterPresent(letter, result);
 
-        }
+			if (result == true) {
+				int timesFound = checkTimesFound(letter, letters);
+				lettersRemaining -= timesFound;
+				addLetter(letter, foundLetters);
 
-        printer.print("You lose!");
-        printer.printFullWord(word);
+				printer.printLetterLists(foundLetters, wrongLetters);
+			}
 
-        return false;
-    }
+			if (result == false) {
+				lives -= 1;
+				addLetter(letter, wrongLetters);
+
+				printer.printLetterLists(foundLetters, wrongLetters);
+			}
+
+			// Winning condition
+			if (lettersRemaining == 0 && lives > 0) {
+				printer.printHappyMan();
+				printer.printWord(foundLetters, word);
+				printer.print("You win!");
+				return true;
+			}
+
+			printer.print("Letters remaining: " + lettersRemaining);
+			printer.printEmptyLine();
+			printer.printHanging(lives);
+			printer.printWord(foundLetters, word);
+			printer.printEmptyLine();
+
+		}
+
+		printer.print("You lose!");
+		printer.printFullWord(word);
+
+		return false;
+
+	}
 
 }
