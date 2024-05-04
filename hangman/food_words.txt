@@ -1,0 +1,10 @@
+pizza
+burger
+sushi
+pasta
+salad
+steak
+ice cream
+sandwich
+chocolate
+pancakes
