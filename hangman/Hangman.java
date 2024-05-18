@@ -1,81 +1,144 @@
-// implement necessary changes based on singleton pattern
-
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 class Hangman {
 
-    public static void main(String[] args) {
-        Printer printer = Printer.getInstance();
-        printer.printTitle();
+	public static void main(String[] args) {
+		Printer printer = Printer.getInstance();
+		printer.printTitle();
 
-        System.out.println("Choose a category:");
-        System.out.println("1. Food");
-        System.out.println("2. Colors");
-        System.out.println("3. Animals");
-        System.out.println("4. Random");
-        System.out.print("Enter your choice: ");
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        Category selectedCategory;
+		//instance of the GameSubject class for notifying observers.
+        GameSubject gameSubject = new GameSubject();
 
-        switch (choice) {
-            case 1:
-                selectedCategory = new FoodCategory();
-                break;
-            case 2:
-                selectedCategory = new ColorCategory();
-                break;
-            case 3:
-                selectedCategory = new AnimalCategory();
-                break;
-            case 4:
-            	selectedCategory = new CompositeCategory("wordlist", List.of(new FoodCategory(), new ColorCategory(), new AnimalCategory()));
-            default:
-                System.out.println("Invalid choice. Exiting the game.");
-                return;
-        }
-if(choice <4) {
-        String categoryFileName = selectedCategory.getCategoryName().toLowerCase() + "_words.txt";
-        WordParser wordParser = new WordParser(categoryFileName);
-        wordParser.createFile();
-        wordParser.createScanner();
-        List<String> words = wordParser.parse();}
-else {
-	 String categoryFileName = selectedCategory.getCategoryName().toLowerCase() + "_words.txt";
-     WordParser wordParser = new WordParser(categoryFileName);
-     wordParser.createFile();
-     wordParser.createScanner();
-     List<String> words = wordParser.parse();}
+        //instance of the HangmanObserver will receive notifications from the GameSubject.
+        HangmanObserver observer = new HangmanObserver(gameSubject);
+        
+        //adds the observer to the list of observers maintained by the gameSubject.
+        gameSubject.registerObserver(observer);
+		
+		
+		ParserFactory parserFactory = new ParserFactory();
+		/*Parser wordParser = parserFactory.createParser("./wordlist.txt");
+		wordParser.createFile();
+		wordParser.createScanner();
+		ArrayList<String> words = wordParser.parse();*/
 
-        // Print word for testing
-        // System.out.println(word);
+//	   	 Print word for testing
+//		 System.out.println(word);
 
-        printer.printEmptyLine();
+		printer.printEmptyLine();
+		
+		ArrayList<String> words = chooseCategory();
 
-        int winningStreak = 0;
+		int winningStreak = 0;
 
-        do {
+		do {
 
-            WordPicker wordPicker = new WordPicker(words);
-            String word = wordPicker.pick();
-            Game game = new Game(word);
-            
-            Hint decoratedHint = new HintDecoratorActivate(new HintLetter());
+			// Ensure that the words list is not empty before picking a word
+			if (words.isEmpty()) {
+				System.out.println("No words available. Exiting the game.");
+				return;
+			}
+			// If the list is not empty, proceed to pick a word
+			WordPicker wordPicker = new WordPicker(words);
+			String word = wordPicker.pick();
+			
+			/*instance of the Game class
+			 * passing the word and gameSubject as parameters to the constructor
+			 * Instantiate the Game object with the picked word and gameSubject*/
+			Game game = new Game(word, gameSubject);
+
+			Hint decoratedHint = new HintDecoratorActivate(new HintLetter());
 			Hint hintWithDefinition = new HintDefinitionDecorator(decoratedHint, "definition.txt");
 			game.setHint(hintWithDefinition);
-			// Set the decorated hint as the hint for the game
-			game.setHint(hintWithDefinition);
-            if (game.play() == true) {
-                winningStreak += 1;
-                printer.print("Winning streak: " + winningStreak);
-            } else {
-                winningStreak = 0;
-            }
+			
+			// Set up the game context and initial state
+			Context context = new Context();
+			StopPlayingState Stop = new StopPlayingState();
+			
+			if (context.getState() instanceof StopPlayingState) {
+				printer.print("Game stopped.");
+				Stop.doAction(context);
+			}
+			
+			if (game.play() == true) {
+				winningStreak += 1;
+				printer.print("Winning streak: " + winningStreak);
+			} else {
+				winningStreak = 0;
+			}
 
-        } while (PlayAgain.getInstance().wannaPlay() == true); //the only change to implement singleton pattern 
+		} while (PlayAgain.getInstance().wannaPlay() == true); // the only change to implement singleton pattern
 
-        printer.print("Thanks for playing!");
+		printer.print("Thanks for playing!");
+
+	}
+	//methods for choosing the category (composite design pattern)
+	public static ArrayList<String> chooseCategory(){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> words;
+
+        while(true){
+
+        System.out.println("Welcome!");
+        System.out.println("------------------------------------");
+        System.out.println("Please choose a category: ");
+        System.out.println("1. Animals");
+        System.out.println("2. Colors");
+        System.out.println("3. Food");
+        System.out.println("4. Random");
+        System.out.println("------------------------------------");
+
+        int choice = sc.nextInt();
+
+        if (choice==1) {
+            words = createAnimalCategory();
+            return words;
+        }
+        else if (choice==2) {
+            words = createColorCategory();
+            return words;
+        }
+        else if (choice==3) {
+            words = createFoodCategory();
+            return words;
+        }
+        else if (choice==4) {
+            words = createCompositeCategory();
+            return words;
+        }
+        else {
+            System.out.println("Choose a correct number!!");
+        }
+        }
+    }
+
+    public static ArrayList<String> createAnimalCategory(){
+        Category animal = new AnimalCategory();
+        return animal.getRandomWord();
+    }
+
+    public static ArrayList<String> createFoodCategory(){
+        Category food = new FoodCategory();
+        return food.getRandomWord();
+    }
+
+    public static ArrayList<String> createColorCategory(){
+        Category color = new ColorCategory();
+        return color.getRandomWord();
+    }
+    public static ArrayList<String> createCompositeCategory(){
+        CompositeCategory composite = new CompositeCategory();
+        Category food = new FoodCategory();
+        Category animal = new AnimalCategory();
+        Category color = new ColorCategory();
         
+        composite.addCategory(food);
+        composite.addCategory(color);
+        composite.addCategory(animal);
+        
+        return composite.getRandomWord();
     }
 
 }
