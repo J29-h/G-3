@@ -1,27 +1,20 @@
-import java.util.List;
-import java.util.Random;
+import java.util.ArrayList;
 
 public class FoodCategory implements Category {
-	 private List<String> foodWords;
-	    private Random random;
-	    
-	    public FoodCategory() {
-	    	WordParser wordParser = new WordParser("food_words.txt");
-	        this.foodWords = wordParser.parse();
-	        this.random = new Random();
-	    }
-	@Override
-	public String getCategoryName() {
-		return "Food";
-	}
-	
-	@Override
-	public String getRandomWord() {
-		if (this.foodWords.isEmpty()) {
-            return "";
-        } else {
-            int randomIndex = this.random.nextInt(this.foodWords.size());
-            return (String)this.foodWords.get(randomIndex);
-        }
-	}
+    private String categoryName="Food";
+    @Override
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    @Override
+    public ArrayList<String> getRandomWord() {
+        ParserFactory parserFactory = new ParserFactory();
+        Parser wordParser = parserFactory.createParser("./food_words.txt");
+
+        wordParser.createFile();
+        wordParser.createScanner();
+
+        return wordParser.parse();
+    }
 }
