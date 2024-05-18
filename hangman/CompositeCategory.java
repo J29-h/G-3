@@ -1,40 +1,33 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
-public class CompositeCategory implements Category{
-	
-	String categoryName;
-	private List<Category> categories;
-	
-	public CompositeCategory(String categoryName, List<Category> categories) {
-		this.categoryName=categoryName;
-		this.categories = categories;
-	}
-	
-	@Override
-	public String getCategoryName() {
-		return this.categoryName;
-	}
-	
-	@Override
-	public String getRandomWord() {
-		 StringBuilder sb = new StringBuilder();
-	        Iterator var3 = this.categories.iterator();
+public class CompositeCategory implements Category {
+    private String categoryName= "Random";
+    private List<Category> categories;
 
-	        while(var3.hasNext()) {
-	            Category category = (Category)var3.next();
-	            sb.append(category.getRandomWord());
-	        }
+    public CompositeCategory(){
+        this.categories= new ArrayList<>();
+    }
 
-	        return sb.toString();
-	}
-	
-	public void addCategory(Category category) {
-		categories.add(category);
-	}
-	
-	public void removeCategory(Category category) {
-		categories.remove(category);
-	}
+    public void addCategory (Category category){
+    categories.add(category);
+    }
+
+    public void removeCategory (Category category){
+    categories.remove(category);
+    }
+    @Override
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    @Override
+    public ArrayList<String> getRandomWord() {
+        Random random = new Random();
+        int index = random.nextInt(categories.size());
+        Category randomCategory = categories.get(index);
+        return randomCategory.getRandomWord();
+    }
 }
+
