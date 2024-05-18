@@ -11,6 +11,7 @@ public class Game {
 	private int hintRequests; // Track the number of hint requests
 	private Scanner scanner;
 	private final int maxHintRequests = 3;
+	private GameSubject gameSubject; // here is a private obj of the subject
 
 	private String[] letters;
 	private ArrayList<String> enteredLetters;
@@ -19,7 +20,7 @@ public class Game {
 
 	private int lives;
 
-	Game(String word_) {
+	Game(String word_, GameSubject gameSubject) {
 		word = word_;
 		lettersRemaining = word.length(); // Initialized as the total length of the word
 		letters = new String[lettersRemaining]; // Will contain the letters of the word, each letter will be one element
@@ -27,6 +28,7 @@ public class Game {
 		foundLetters = new ArrayList<String>();
 		wrongLetters = new ArrayList<String>();
 		lives = 6;
+		this.gameSubject = gameSubject;
 	}
 
 	public void setHint(Hint hint) {
@@ -167,7 +169,8 @@ public class Game {
 			if (result == false) {
 				lives -= 1;
 				addLetter(letter, wrongLetters);
-
+				// Notify observers about the remaining body parts
+				gameSubject.setBodyPartsRemaining(lives);
 				printer.printLetterLists(foundLetters, wrongLetters);
 			}
 
