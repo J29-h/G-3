@@ -1,6 +1,6 @@
+import java.util.ArrayList;
 
 public interface Category {
-	String getCategoryName();
-	String getRandomWord();
-
+        String getCategoryName();
+        ArrayList<String> getRandomWord();
 }
