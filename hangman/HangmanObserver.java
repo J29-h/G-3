@@ -3,7 +3,6 @@ public class HangmanObserver extends RemainPartsObserver {
 	// create a class constructor for the subject class
 	public HangmanObserver(GameSubject subject) {
 		this.subject = subject;
-//		this.subject.registerObserver(this);
 	}
 
 	@Override
