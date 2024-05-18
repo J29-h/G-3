@@ -1,29 +1,20 @@
-import java.util.List;
-import java.util.Random;
+import java.util.ArrayList;
 
-public class AnimalCategory implements Category {
-	private List<String> animalWords;
-    private Random random;
-    
-    public AnimalCategory() {
-        WordParser wordParser = new WordParser("animal_words.txt");
-        this.animalWords = wordParser.parse();
-        this.random = new Random();
+public class AnimalCategory implements Category{
+    private String categoryName = "Animal";
+    @Override
+    public String getCategoryName() {
+        return categoryName;
     }
-    
-	@Override
-	public String getCategoryName() {
-		return "Animal";
-	}
-	
-	@Override
-	public String getRandomWord() {
-		 if (this.animalWords.isEmpty()) {
-	            return "";
-	        } else {
-	            int randomIndex = this.random.nextInt(this.animalWords.size());
-	            return (String)this.animalWords.get(randomIndex);
-	        }
-	}
 
+    @Override
+    public ArrayList<String> getRandomWord() {
+        ParserFactory parserFactory = new ParserFactory();
+        Parser wordParser = parserFactory.createParser("./animal_words.txt");
+
+        wordParser.createFile();
+        wordParser.createScanner();
+
+        return wordParser.parse();
+}
 }
