@@ -17,13 +17,6 @@ class Hangman {
         //adds the observer to the list of observers maintained by the gameSubject.
         gameSubject.registerObserver(observer);
 		
-		
-		ParserFactory parserFactory = new ParserFactory();
-		/*Parser wordParser = parserFactory.createParser("./wordlist.txt");
-		wordParser.createFile();
-		wordParser.createScanner();
-		ArrayList<String> words = wordParser.parse();*/
-
 //	   	 Print word for testing
 //		 System.out.println(word);
 
